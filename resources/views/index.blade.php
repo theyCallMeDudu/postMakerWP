@@ -37,7 +37,7 @@
                 </td>
 
                 <td>
-                    <a href="#" data-toggle="tooltip" title="Editar">
+                    <a href="{{url("posts/$posts->id/edit")}}" data-toggle="tooltip" title="Editar">
                         <button class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </button>

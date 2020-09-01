@@ -78,7 +78,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = $this->objPost->find($id);
+        $users = $this->objUser->all();
+        return view('create', compact('post', 'users'));
     }
 
     /**
@@ -90,7 +92,12 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
-        //
+        $this->objPost->where(['id' => $id])->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'id_user' =>$request->id_user
+        ]);
+        return redirect('posts');
     }
 
     /**
