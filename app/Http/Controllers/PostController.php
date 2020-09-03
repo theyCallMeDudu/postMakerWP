@@ -47,11 +47,19 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
+        //$data = $request->all();
+        $user_id = auth()->user()->id;
+        $user_name = auth()->user()->name;
+
         $cad = $this->objPost->create([
             'title' => $request->title,
             'content' => $request->content,
-            'id_user' =>$request->id_user
+            'id_user' =>$user_id
         ]);
+
+
+        //$post = $user->relPosts()->create($data);
+        //flash('Postagem criada com sucesso')->success();
 
         if($cad){
             return redirect('posts');

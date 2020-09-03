@@ -10,17 +10,17 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-1">
         <a class="navbar-brand" href="{{url("/posts")}}">
             <img src="assets/img/unirio-logo.png" width="40" height="40" alt="" loading="lazy">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        
+            @auth
             <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item">
+                <li class="nav-item @if(request()->is('posts')) active @endif">
                     <a class="nav-link" href="{{url("/posts")}}">Minhas Postagens<span class="sr-only">(current)</span></a>
                 </li>
             
@@ -29,14 +29,15 @@
             <div class="my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <span class="nav-link"></span>
-                    </li>
-                
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sair</a>
+                        <a class="nav-link" href="#" onclick="event.preventDefault(); document.querySelector('form.logout').submit()">Sair</a>
+                        <form action="{{route('logout')}}" class="logout" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </li>
                 </ul>
             </div>
+            @endauth
+
         </div>
     </nav>
 

@@ -30,12 +30,6 @@
     @endif
         
             @csrf
-            <select name="id_user" id="id_user" class="form-control mb-3">
-                <option value="{{$post->relUsers->id ?? ''}}">{{$post->relUsers->name ?? 'Autor'}}</option>
-                @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-            </select>
 
             <input name="title" id="title" class="form-control mb-3" type="text" value="{{$post->title ?? ''}}" placeholder="Título" required>
             
