@@ -22,9 +22,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        $post = $this->objPost->all();
+         //$post = $this->objPost->all();
+        $post = $this->objPost->paginate(5);
         return view('index', compact('post'));
     }
 

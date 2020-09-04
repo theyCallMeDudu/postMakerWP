@@ -53,11 +53,11 @@
                 </td>
             </tr>
             @endforeach
-
-                    
-                
+ 
             </tbody>
         </table>
-        
+
+        {{$post->links()}}
+
     </div>
 @endsection
