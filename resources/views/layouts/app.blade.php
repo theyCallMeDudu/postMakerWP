@@ -38,10 +38,7 @@
                     <li class="nav-item">
                         <span class="nav-link">{{auth()->user()->name}}</span>
                     </li>
-
-                    <!-- <li class="nav-item @if(request()->is('posts')) 'style: display:none;' @endif">
-                        <a class="nav-link" href="{{url("/posts")}}">Registre-se</a>
-                    </li> -->
+                    
                 </ul>
             </div>
             @endauth
