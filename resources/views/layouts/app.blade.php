@@ -38,15 +38,28 @@
                     <li class="nav-item">
                         <span class="nav-link">{{auth()->user()->name}}</span>
                     </li>
-                    
                 </ul>
-            </div>
             @endauth
+            </div>
+
+            @guest
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url("/register")}}">Registre-se</a>
+                </li>
+            </ul>
+            @endguest
+            
 
         </div>
     </nav>
 
+    <div class="col-8 m-auto">
+        @include('flash::message')
+    </div>
+
     @yield('content')
+    
     <script src="{{url('assets/bootstrap/js/jquery-3.5.1.min.js')}}"></script>
     <script src="{{url('assets/js/script.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

@@ -6,11 +6,11 @@
 
     <div class="col-8 m-auto">
 
-    <div class="text-right">
-        <a href="{{url("posts/create")}}">
-            <button class="btn btn-success mb-3">Nova postagem</button>
-        </a>
-    </div>
+        <div class="text-right">
+            <a href="{{url("posts/create")}}">
+                <button class="btn btn-success mb-3">Nova postagem</button>
+            </a>
+        </div>
 
         <table class="table table-dark text-center">
             <thead class="thead-dark">
@@ -24,10 +24,13 @@
             <tbody>
                 
             @foreach($post as $posts)
+
             <tr>
                 <th scope="row">{{$posts->id}}</th>
                 <td>{{$posts->title}}</td>
-                <td>{{$posts->timestamps}}</td>
+                <td> <?php date_default_timezone_set('America/Sao_Paulo'); ?> 
+                     {{$posts->created_at->format('d-m-Y H:i:s')}}
+                </td>
                 <td>
                     <a href="#" target="_blank" data-toggle="tooltip" title="Visualizar">
                         <button class="btn btn-danger">

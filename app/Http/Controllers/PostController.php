@@ -26,7 +26,7 @@ class PostController extends Controller
     public function index()
     {
          //$post = $this->objPost->all();
-        $post = $this->objPost->paginate(5);
+        $post = $this->objPost->orderBy('created_at', 'desc')->paginate(5);
         return view('index', compact('post'));
     }
 
@@ -61,8 +61,8 @@ class PostController extends Controller
 
 
         //$post = $user->relPosts()->create($data);
-        //flash('Postagem criada com sucesso')->success();
-
+        
+        flash('Postagem criada com sucesso')->success();
         if($cad){
             return redirect('posts');
         }
@@ -102,11 +102,15 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
+        $user_id = auth()->user()->id;
+
         $this->objPost->where(['id' => $id])->update([
             'title' => $request->title,
             'content' => $request->content,
-            'id_user' =>$request->id_user
+            'id_user' =>$user_id
         ]);
+
+        flash('Postagem atualizada com sucesso')->success();
         return redirect('posts');
     }
 
