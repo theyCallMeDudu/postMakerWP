@@ -6,10 +6,14 @@
 
     <div class="col-8 m-auto">
 
-        <div class="text-right">
-            <a href="{{url("posts/create")}}">
+        <div>
+
+            <span class="text-left">Total de postagens: <strong>{{$quantity}}</strong></span>
+
+            <a class="text-right" style="float: right !important;" href="{{url("posts/create")}}">
                 <button class="btn btn-success mb-3">Nova postagem</button>
             </a>
+            
         </div>
 
         <table class="table table-dark text-center">

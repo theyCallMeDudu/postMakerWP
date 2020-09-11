@@ -26,8 +26,12 @@ class PostController extends Controller
     public function index()
     {
          //$post = $this->objPost->all();
-        $post = $this->objPost->orderBy('created_at', 'desc')->paginate(5);
-        return view('index', compact('post'));
+        //$post = $this->objPost->orderBy('created_at', 'desc')->paginate(5);
+        $user_id = auth()->user()->id;
+        $post = $this->objPost->where('id_user', '=', $user_id)->orderBy('created_at', 'desc')->paginate(10);
+        $quantity = $this->objPost->where('id_user', '=', $user_id)->get()->count();
+
+        return view('index', compact('post', 'quantity'));
     }
 
     /**
