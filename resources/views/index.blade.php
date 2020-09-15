@@ -36,27 +36,66 @@
                      {{$posts->created_at->format('d-m-Y H:i:s')}}
                 </td>
                 <td>
-                    <a href="#" target="_blank" data-toggle="tooltip" title="Visualizar">
+                    <a href="#" target="_blank" title="Visualizar">
                         <button class="btn btn-danger">
                             <i class="fas fa-external-link-square-alt"></i>
                         </button>
                     </a>
-                </td>
 
-                <td>
-                    <a href="{{url("posts/$posts->id/edit")}}" data-toggle="tooltip" title="Editar">
+                    <a href="{{url("posts/$posts->id/edit")}}" title="Editar">
                         <button class="btn btn-primary">
                             <i class="fas fa-edit"></i>
                         </button>
                     </a>
-                </td>
 
-                <td>
-                    <a href="#" data-toggle="tooltip" title="Publicar">
-                        <button class="btn btn-success">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </a>
+                    <button type="button" class="btn btn-success" data-toggle="modal" title="Publicar" data-target="#modalPublicacao<?php echo $posts->id ?>">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+
+                    <!-- Inicio Modal publicação -->
+                    <div class="modal fade" data-backdrop="static" id="modalPublicacao<?php echo $posts->id ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-left" id="exampleModalLabel" style="color: #000 !important;">Publicação de postagem</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                </div>
+                                    
+                                <div class="modal-body text-center text-dark">
+                                    <p><strong>Deseja realmente publicar?</strong></p>
+                                        
+                                    <div class="text-left">
+                                        <label for="">Título</label>
+                                        <input type="text" class="form-control mb-1" value="{{$posts->title}}" disabled="disabled">
+
+                                        <label for="">Conteúdo</label>
+                                        <textarea class="form-control mb-1" name="" id="" cols="30" rows="10" disabled="disabled">{{$posts->content}}</textarea> 
+
+                                        <label for="">Imagem</label>
+                                        <input class="form-control" type="text">
+
+                                        <label for="">Horário</label>
+                                        <input class="form-control" type="datetime-local">
+                                    </div>
+
+                                </div>
+                                    
+                                <div class="modal-footer text-center">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+
+                                    <!--  -->
+                                        <a href="#">
+                                            <button type="submit" class="btn btn-danger">Sim</button>
+                                        </a>
+                                    <!--  -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fim Modal publicação -->
+
                 </td>
             </tr>
             @endforeach

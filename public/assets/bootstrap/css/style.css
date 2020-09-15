@@ -10,3 +10,11 @@ body{
 .card{
     color: #000 !important;
 }
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+.modal-body{
+    height: 250px;
+    overflow-y: auto;
+}
