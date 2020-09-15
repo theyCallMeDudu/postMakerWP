@@ -66,7 +66,7 @@ class PostController extends Controller
 
         //$post = $user->relPosts()->create($data);
         
-        flash('Postagem criada com sucesso')->success();
+        flash('Postagem '.$cad->id .' criada com sucesso')->success();
         if($cad){
             return redirect('posts');
         }

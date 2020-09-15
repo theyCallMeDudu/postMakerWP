@@ -31,18 +31,20 @@
         
             @csrf
 
-            <input name="title" id="title" class="form-control mb-3" type="text" value="{{$post->title ?? ''}}" placeholder="Título" required>
+            <label>Título</label>
+            <input name="title" id="title" class="form-control mb-3" type="text" value="{{$post->title ?? ''}}" required>
             
+            <label>Texto da postagem</label>
             <div class="mb-1">
                 <button type="button" class="btnClearText btn btn-light" data-toggle="tooltip" title="Limpar texto">
                     <i class="fas fa-eraser"></i>    
                 </button>
             </div>
 
-            <textarea name="content" id="content" class="form-control mb-3" cols="30" rows="10" placeholder="Texto da postagem" required>{{$post->content ?? ''}}</textarea>
-            <input name="" id="" class="form-control mb-3" type="file" disabled>
-
+            <textarea name="content" id="content" class="form-control mb-3" cols="30" rows="10" required>{{$post->content ?? ''}}</textarea>
             
+            <label>Imagem da postagem</label>
+            <input name="" id="" class="form-control mb-3" type="file" disabled>
 
             <input class="btn btn-primary mb-3" type="submit" value="@if(isset($post)) Salvar alterações @else Cadastrar @endif">
         </form>
