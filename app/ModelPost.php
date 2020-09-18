@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class ModelPost extends Model
 {
     protected $table = 'posts';
-    protected $fillable = ['title', 'content', 'id_user'];
+    protected $fillable = ['title', 'content', 'image', 'id_user'];
 
     public function relUsers(){
-        return $this->hasOne('App\User', 'id', 'id_user');
+        return $this->belongsTo('App\User', 'id', 'id_user');
+    }
+
+    public function relPhotos(){
+        return $this->hasOne(ModelPhoto::class, 'id_post');
     }
 }

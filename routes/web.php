@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => ['auth']], function(){
     
     Route::resource('/posts', 'PostController');
-
+    Route::post('/photos/remove', 'PostPhotoController@removePhoto');
 
 });
 

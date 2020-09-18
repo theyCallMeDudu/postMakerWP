@@ -74,7 +74,11 @@
                                         <textarea class="form-control mb-1" name="" id="" cols="30" rows="10" disabled="disabled">{{$posts->content}}</textarea> 
 
                                         <label for="">Imagem</label>
-                                        <input class="form-control" type="text">
+                                        <div class="card">
+                                        @if(isset($posts->relPhotos->image))
+                                            <img src="{{asset('storage/' . $posts->relPhotos->image)}}" alt="" class="img-fluid">
+                                        @endif
+                                        </div>
 
                                         <label for="">Horário</label>
                                         <input class="form-control" type="datetime-local">

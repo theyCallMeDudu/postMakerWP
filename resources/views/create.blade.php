@@ -23,10 +23,10 @@
     <div>
 
     @if(isset($post))
-        <form name="formEdit" id="formEdit" method="post" action="{{url("posts/$post->id")}}">
+        <form name="formEdit" id="formEdit" method="post" action="{{url("posts/$post->id")}}" enctype="multipart/form-data">
         @method('PUT')
     @else
-        <form name="formCad" id="formCad" method="post" action="{{url('posts')}}">
+        <form name="formCad" id="formCad" method="post" action="{{url('posts')}}" enctype="multipart/form-data">
     @endif
         
             @csrf
@@ -43,10 +43,28 @@
 
             <textarea name="content" id="content" class="form-control mb-3" cols="30" rows="10" required>{{$post->content ?? ''}}</textarea>
             
-            <label>Imagem da postagem</label>
-            <input name="" id="" class="form-control mb-3" type="file" disabled>
+            <div class="form-group">
+                <label>Imagem da postagem</label>
+                <input type="file" class="form-control" name="image">
+            </div>
 
             <input class="btn btn-primary mb-3" type="submit" value="@if(isset($post)) Salvar alterações @else Cadastrar @endif">
         </form>
+
+        <div class="form-group">
+            @if(isset($post->relPhotos->image))
+            <img src="{{asset('storage/' . $post->relPhotos->image)}}" alt="" class="img-fluid">
+
+            <form action="{{url('/photos/remove')}}" method="post">
+                @csrf
+                <input type="hidden" name="photoName" value="{{$post->relPhotos->image}}">
+    
+                <button type="submit" class="btn btn-danger" data-toggle="tooltip" title="Remover imagem">
+                            <i class="fas fa-trash"></i>
+                </button>
+            </form>
+            @endif
+        </div>
+        
     </div>
 @endsection

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostRequest;
 use App\ModelPost;
+use App\ModelPhoto;
 use App\User;
 
 class PostController extends Controller
@@ -15,6 +16,7 @@ class PostController extends Controller
     public function __construct(){
         $this->objUser = new User();
         $this->objPost = new ModelPost();
+        $this->objPhoto = new ModelPhoto();
     }
 
     /**
@@ -51,9 +53,16 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    private function imageUpload(PostRequest $request){
+        $image = $request->file('image');
+        $content = $image->store('post_image', 'public');
+
+        return $content;
+    }
+
     public function store(PostRequest $request)
     {
-        //$data = $request->all();
         $user_id = auth()->user()->id;
         $user_name = auth()->user()->name;
 
@@ -63,14 +72,20 @@ class PostController extends Controller
             'id_user' =>$user_id
         ]);
 
-
-        //$post = $user->relPosts()->create($data);
-        
         flash('Postagem '.$cad->id .' criada com sucesso')->success();
+
         if($cad){
+            if($request->hasFile('image')){
+                $image = $this->imageUpload($request);
+    
+                // inserção da imagem/ referência na base
+                $this->objPhoto->create([
+                    'image' => $image,
+                    'id_post' => $cad->id
+                ]);
+            }
             return redirect('posts');
         }
-        
     }
 
     /**
@@ -113,6 +128,15 @@ class PostController extends Controller
             'content' => $request->content,
             'id_user' =>$user_id
         ]);
+
+        if($request->hasFile('image')){
+            $image = $this->imageUpload($request);
+
+            $this->objPhoto->create([
+                'image' => $image,
+                'id_post' => $id
+            ]);
+        }
 
         flash('Postagem atualizada com sucesso')->success();
         return redirect('posts');
