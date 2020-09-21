@@ -17,6 +17,7 @@ Route::group(['middleware' => ['auth']], function(){
     
     Route::resource('/posts', 'PostController');
     Route::post('/photos/remove', 'PostPhotoController@removePhoto');
+    Route::get('/posts/publish/{id}', 'PostController@publish');
 
 });
 

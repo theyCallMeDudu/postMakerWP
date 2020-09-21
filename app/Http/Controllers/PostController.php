@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\PostRequest;
 use App\ModelPost;
 use App\ModelPhoto;
 use App\User;
+
 
 class PostController extends Controller
 {
@@ -69,6 +71,8 @@ class PostController extends Controller
         $cad = $this->objPost->create([
             'title' => $request->title,
             'content' => $request->content,
+            'post_date' => $request->post_date,
+            'post_time' => $request->post_time,
             'id_user' =>$user_id
         ]);
 
@@ -126,6 +130,8 @@ class PostController extends Controller
         $this->objPost->where(['id' => $id])->update([
             'title' => $request->title,
             'content' => $request->content,
+            'post_date' => $request->post_date,
+            'post_time' => $request->post_time,
             'id_user' =>$user_id
         ]);
 
@@ -151,5 +157,15 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function publish($id){
+        $post_id = $this->objPost->find($id);
+        $title = $this->objPost->find($id)->title;
+        $content = $this->objPost->find($id)->content;
+        $date = $this->objPost->find($id)->post_date;
+        $time = $this->objPost->find($id)->post_time;
+        
+        dd($post_id, $title, $content, $date, $time);
     }
 }

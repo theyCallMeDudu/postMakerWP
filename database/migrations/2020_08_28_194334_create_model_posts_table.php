@@ -19,6 +19,8 @@ class CreateModelPostsTable extends Migration
             $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('title');
             $table->string('content');
+            $table->date('post_date');
+            $table->time('post_time');
             $table->timestamps();
         });
     }

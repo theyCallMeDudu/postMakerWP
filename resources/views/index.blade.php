@@ -21,7 +21,7 @@
                 <tr>
                 <th scope="col">Registro</th>
                 <th scope="col">Título</th>
-                <th scope="col">Data</th>
+                <th scope="col">Criado em</th>
                 <th scope="col">Ações</th>
                 </tr>
             </thead>
@@ -74,14 +74,15 @@
                                         <textarea class="form-control mb-1" name="" id="" cols="30" rows="10" disabled="disabled">{{$posts->content}}</textarea> 
 
                                         <label for="">Imagem</label>
-                                        <div class="card">
+                                        <div class="card mb-1">
                                         @if(isset($posts->relPhotos->image))
                                             <img src="{{asset('storage/' . $posts->relPhotos->image)}}" alt="" class="img-fluid">
                                         @endif
                                         </div>
 
-                                        <label for="">Horário</label>
-                                        <input class="form-control" type="datetime-local">
+                                            <label style="display: block !important;">Publicar em:</label>
+                                            <input style="width: 36% !important; display: inline-block !important;" type="date" class="form-control m-auto" name="post_date" id="post_date" value="{{$posts->post_date ?? ''}}" disabled="disabled">
+                                            <input style="width: 25% !important; display: inline-block !important;" type="time" class="form-control m-auto" name="post_time" id="post_time" value="{{$posts->post_time ?? ''}}" disabled="disabled">
                                     </div>
 
                                 </div>
@@ -89,11 +90,11 @@
                                 <div class="modal-footer text-center">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
 
-                                    <!--  -->
-                                        <a href="#">
+                                    <!-- Botão confirmação de publicação -->
+                                        <a href="{{url("posts/publish/$posts->id")}}">
                                             <button type="submit" class="btn btn-danger">Sim</button>
                                         </a>
-                                    <!--  -->
+                                    <!-- Fim Botão confirmação de publicação -->
                                 </div>
                             </div>
                         </div>

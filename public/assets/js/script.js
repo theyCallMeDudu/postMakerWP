@@ -6,6 +6,11 @@ $(document).ready(function(){
         $('#content').val("");
     });
 
+    $('.btnClearSchedule').click(function(){
+        $('#post_date').val("");
+        $('#post_time').val("");
+    });
+
 
   });
 

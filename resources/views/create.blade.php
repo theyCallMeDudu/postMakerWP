@@ -48,6 +48,19 @@
                 <input type="file" class="form-control" name="image">
             </div>
 
+            <div class="form-group">
+                <label for="" style="display: block !important;">Publicar em:</label>
+                <div>
+                    <input style="width: 20% !important; display: inline-block !important;" type="date" class="form-control m-auto" name="post_date" id="post_date" value="{{$post->post_date ?? ''}}">
+                    <input style="width: 15% !important; display: inline-block !important;" type="time" class="form-control m-auto" name="post_time" id="post_time" value="{{$post->post_time ?? ''}}">
+                    
+                    <button type="button" class="btnClearSchedule btn btn-danger" data-toggle="tooltip" title="Limpar agendamento">
+                    <i class="fas fa-trash"></i>    
+                    </button>
+                </div>
+                
+            </div>
+
             <input class="btn btn-primary mb-3" type="submit" value="@if(isset($post)) Salvar alterações @else Cadastrar @endif">
         </form>
 
