@@ -165,7 +165,8 @@ class PostController extends Controller
         $content = $this->objPost->find($id)->content;
         $date = $this->objPost->find($id)->post_date;
         $time = $this->objPost->find($id)->post_time;
+        $photo = $this->objPhoto->find($id)->image;
         
-        dd($post_id, $title, $content, $date, $time);
+        dd($post_id, $title, $content, $date, $time, $photo);
     }
 }

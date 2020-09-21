@@ -32,8 +32,8 @@
             <tr>
                 <th scope="row">{{$posts->id}}</th>
                 <td>{{$posts->title}}</td>
-                <td> <?php date_default_timezone_set('America/Sao_Paulo'); ?> 
-                     {{$posts->created_at->format('d-m-Y H:i:s')}}
+                <td>
+                    {{$posts->created_at->format('d-m-Y H:i:s')}}
                 </td>
                 <td>
                     <a href="#" target="_blank" title="Visualizar">
