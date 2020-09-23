@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use App\Http\Requests\PostRequest;
 use App\ModelPost;
 use App\ModelPhoto;
 use App\User;
-
 
 class PostController extends Controller
 {
@@ -159,14 +159,53 @@ class PostController extends Controller
         //
     }
 
+    private function fileCatch(){
+        $fileName = "blog/wordpress/wp-post/test.php";
+        $content  = File::get($fileName);
+        
+        dd($content);
+    }
+
     public function publish($id){
+        // Gathering data from the item clicked on the table on Laravel
+        $user_id = auth()->user()->id;
         $post_id = $this->objPost->find($id);
         $title = $this->objPost->find($id)->title;
         $content = $this->objPost->find($id)->content;
         $date = $this->objPost->find($id)->post_date;
         $time = $this->objPost->find($id)->post_time;
         $photo = $this->objPhoto->find($id)->image;
+
+        $dateTime = date('Y-m-d H:i:s', strtotime("$date $time"));
         
-        dd($post_id, $title, $content, $date, $time, $photo);
+        //dd($post_id, $title, $content, $date, $time, $photo);
+
+
+        /*********************************************
+        * WordPress array and variables for posting *
+        *********************************************/
+
+        //  $newPost = array(
+        //     'post_title' => $leadTitle,
+        //     'post_content' => $leadContent,
+        //     'post_status' => $postStatus,
+        //     'post_date' => $timeStamp,
+        //     'post_author' => $userID,
+        //     'post_type' => $postType,
+        //     'post_category' => array($categoryID)
+        // );
+
+        // Publishing the post on wordpress
+        // $post = new Post();
+        // $post->post_title    = $title;
+        // $post->post_content  = $content;
+        // $post->post_status   = 'publish';
+        // $post->post_date     = $dateTime;
+        // $post->post_author   = $user_id;
+        // $post->post_type     = 'post';
+        // $post->post_category = '5';
+        // $post->save();
+
+        $this->fileCatch();
     }
 }
