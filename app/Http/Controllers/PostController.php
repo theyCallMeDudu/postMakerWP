@@ -9,6 +9,8 @@ use App\ModelPost;
 use App\ModelPhoto;
 use App\User;
 
+//require_once __DIR__ . 'blog/wordpress/wp-post/test.php';
+
 class PostController extends Controller
 {
 
@@ -167,6 +169,8 @@ class PostController extends Controller
     }
 
     public function publish($id){
+        include(app_path() . '\Scripts\wordpress\wp-post\test.php');
+
         // Gathering data from the item clicked on the table on Laravel
         $user_id = auth()->user()->id;
         $post_id = $this->objPost->find($id);
@@ -176,6 +180,9 @@ class PostController extends Controller
         $time = $this->objPost->find($id)->post_time;
         $photo = $this->objPhoto->find($id)->image;
 
+        $status = 'publish';
+        $type = 'post';
+        $categoryID = '5';
         $dateTime = date('Y-m-d H:i:s', strtotime("$date $time"));
         
         //dd($post_id, $title, $content, $date, $time, $photo);
@@ -185,27 +192,18 @@ class PostController extends Controller
         * WordPress array and variables for posting *
         *********************************************/
 
-        //  $newPost = array(
-        //     'post_title' => $leadTitle,
-        //     'post_content' => $leadContent,
-        //     'post_status' => $postStatus,
-        //     'post_date' => $timeStamp,
-        //     'post_author' => $userID,
-        //     'post_type' => $postType,
-        //     'post_category' => array($categoryID)
-        // );
+         $newPost = array(
+            'post_title'    => $title,
+            'post_content'  => $content,
+            'post_status'   => $status,
+            'post_date'     => $dateTime,
+            'post_author'   => $user_id,
+            'post_type'     => $type,
+            'post_category' => array($categoryID)
+        );
 
-        // Publishing the post on wordpress
-        // $post = new Post();
-        // $post->post_title    = $title;
-        // $post->post_content  = $content;
-        // $post->post_status   = 'publish';
-        // $post->post_date     = $dateTime;
-        // $post->post_author   = $user_id;
-        // $post->post_type     = 'post';
-        // $post->post_category = '5';
-        // $post->save();
+        // Publishing post on wordpress
 
-        $this->fileCatch();
+        run('test.php');
     }
 }
