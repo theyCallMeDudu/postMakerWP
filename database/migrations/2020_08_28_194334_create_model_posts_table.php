@@ -21,6 +21,7 @@ class CreateModelPostsTable extends Migration
             $table->string('content');
             $table->date('post_date');
             $table->time('post_time');
+            $table->time('publish');
             $table->timestamps();
         });
     }

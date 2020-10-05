@@ -2,6 +2,7 @@
 
     // Require wp-load.php to use built-in WordPress functions
     require_once("../wp-load.php");
+    //require "WordpressController.php";
     
     // Include image.php tp use built-in image WordPress functions
     include_once( ABSPATH . 'wp-admin/includes/image.php' );
@@ -15,7 +16,7 @@
     $categoryID = '5'; // set to category id;
     $postStatus = 'publish'; // set to future, draft or publish;
 
-    $leadTitle = 'First post with PHP, today: '.date("d/n/Y");
+    $leadTitle = '*First post with PHP, today: '.date("d/n/Y");
     $leadContent = '<h1>First test post with PHP</h1><p>This is the first post on WordPress made programatically with PHP.</p>';
 
     /********************************
@@ -50,6 +51,26 @@
          'post_category' => array($categoryID)
      );
 
+    // foreach ($arrayPosts as $key => $valor) {
+    //     /*****************
+    //     - Envolver todas as variaveis que ira usar dentro do bloco do array
+    //     - Dica $userID = $valor->id_user
+    //     - Dica $leadContent = $valor->content
+        
+    //     */
+    //     $newPost = array(
+    //         'post_title' => $valor->title,
+    //         'post_content' => $valor->content,
+    //         'post_status' => $postStatus,
+    //         'post_date' => $timeStamp,
+    //         'post_author' => $valor->id_user,
+    //         'post_type' => $postType,
+    //         'post_category' => array($categoryID)
+    //     );
+    // }
+
+
+
      /***************************
       * WordPress post function *
      ***************************/
@@ -72,13 +93,17 @@
 
       
       // Image to be uploaded to WordPress and set as featured image
-      $IMGFileName = 'ps_logo.png';
+      $IMGFileName = '4GdHlTPYS8Ps2jg7ijb1TfuGroqTMGU6KXB2N65q.jpeg';
 
       // Current path directory
-      $dirPath = getcwd();
-
+      //$dirPath = getcwd();
+      $dirPath = '../../../../../storage/app/public/post_image';
+      
       // Full path of image
-      $IMGFilePath = $dirPath.'/'.$IMGFileName;
+      //$IMGFilePath = $dirPath.'/'.$IMGFileName;
+      $IMGFilePath = $dirPath.'/';
+      
+      print_r($IMGFilePath);
 
       // Messages for file found/ not found in directory
       $message = $IMGFileName.' is not available or found in directory.';
